@@ -17,31 +17,28 @@
 """
 
 
-import re
-
-
 def realization():
-    witnesses = {}
-    result = {}
+    witnesses = []
+    result = []
+    max_value = 0
 
     for i in range(int(input())):
-        for j in list(set(input())):
-            witnesses[j] = witnesses.get(j, 0) + 1
+        witnesses.append(set(input().strip()))
 
     for i in range(int(input())):
-        number = input()
-        letters_sum = 0
+        number = input().strip()
+        witness_count = 0
 
-        if re.match(r'[A-Z][0-9]{3}[A-Z]{2}', number):
-            for letter in number:
-                letters_sum += witnesses.get(letter, 0)
+        for witness in witnesses:
+            if witness <= set(number):
+                witness_count += 1
 
-        result[number] = letters_sum
+        result.append((number, witness_count))
+        max_value = max(max_value, witness_count)
 
-    max_sum = result[max(result, key=result.get)]
-
-    for number in [key for key, value in result.items() if value == max_sum]:
-        print(number)
+    for number in result:
+        if number[1] == max_value:
+            print(number[0])
 
 
 if __name__ == '__main__':

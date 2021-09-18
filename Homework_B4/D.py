@@ -49,7 +49,7 @@ def realization():
         div_results.append((value / first_quotient, key))
         parties[key] = math.floor(value / first_quotient)
 
-    div_results.sort(key= lambda x: x[0] - int(x[0]), reverse=True)
+    div_results.sort(key=lambda x: x[0] - int(x[0]), reverse=True)
     places_sum = sum(parties.values())
 
     if places_sum != places:
